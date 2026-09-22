@@ -1,0 +1,308 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" role="img" aria-labelledby="title desc">
+<title id="title">Монетка — минималистичная карта</title><desc id="desc">Упрощённая векторная карта по предоставленному референсу. Водоём, дорожки, парковые участки и контуры зданий нарисованы редактируемыми SVG-фигурами.</desc>
+<style>text{font-family:Arial,Helvetica,sans-serif} </style>
+<rect width="1600" height="1200" fill="#F8F8F3"/><text x="40" y="61" font-size="35" fill="#293F47" font-weight="600" letter-spacing="4">МОНЕТКА</text>
+<text x="41" y="94" font-size="18" fill="#718178" >Ансамбль зданий и сооружений Екатеринбургского завода</text>
+<text x="1547" y="62" font-size="13" fill="#718178" text-anchor="end" letter-spacing="2">ЕКАТЕРИНБУРГ</text>
+<path d="M40 119H1550" fill="none" stroke="#D9DFD8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/><svg x="30" y="142" width="1085" height="1010" viewBox="0 0 1120 1043" overflow="hidden"><g id="land">
+<rect x="0" y="0" width="1120" height="1080" rx="0" fill="#F8F8F3"/>
+<path d="M100 53H148V432H109Z" fill="#DCE6D1" />
+<path d="M218 234H394V422H218Z" fill="#DCE6D1" />
+<path d="M400 237L779 253H971V428H398Z" fill="#DCE6D1" />
+<path d="M290 579H953V667H354L289 709Z" fill="#DCE6D1" />
+<path d="M269 722H439V791H250Z" fill="#DCE6D1" />
+<path d="M446 676H678V800H440V710Z" fill="#DCE6D1" />
+<path d="M730 675H955V784H731Z" fill="#DCE6D1" />
+<path d="M109 867H165V962H110Z" fill="#DCE6D1" />
+<path d="M212 863H432V950H215Z" fill="#DCE6D1" />
+<path d="M550 866H959V950H548Z" fill="#DCE6D1" />
+<path d="M991 846H1106V951H991Z" fill="#DCE6D1" />
+<path d="M986 581H1071V750H990Z" fill="#DCE6D1" />
+<path d="M1017 391H1072V441H1017Z" fill="#DCE6D1" />
+<path d="M545 69H594V105H545Z" fill="#DCE6D1" />
+<path d="M613 104H726V198H612Z" fill="#DCE6D1" />
+<path d="M790 79H836V235H790Z" fill="#DCE6D1" />
+<path d="M866 83H975V155H913Z" fill="#DCE6D1" />
+<path d="M998 113H1070V249H1000Z" fill="#DCE6D1" />
+<path d="M218 0H969V17H218Z" fill="#DCE6D1" />
+<path d="M113 1020H436V1080H113Z" fill="#DCE6D1" />
+<path d="M549 1020H1109V1080H549Z" fill="#DCE6D1" />
+</g><g id="streets">
+<path d="M59 -40V917Q59 990 114 990H942Q1040 990 1130 984" fill="none" stroke="#E1E5E3" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M99 15L1130 69" fill="none" stroke="#E1E5E3" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M181 59V944" fill="none" stroke="#E1E5E3" stroke-width="23" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M97 835H952" fill="none" stroke="#E1E5E3" stroke-width="27" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M983 280V842" fill="none" stroke="#E1E5E3" stroke-width="29" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M207 226H1034" fill="none" stroke="#E1E5E3" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M956 274H1072" fill="none" stroke="#E1E5E3" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1054 66V255" fill="none" stroke="#E1E5E3" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M748 81V223" fill="none" stroke="#E1E5E3" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M383 360V430M219 430H967" fill="none" stroke="#E1E5E3" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M216 568H972" fill="none" stroke="#E1E5E3" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M352 576V716M257 714H440" fill="none" stroke="#E1E5E3" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M435 705V825M682 664V817M723 668V817" fill="none" stroke="#E1E5E3" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M216 854H960" fill="none" stroke="#F8F8F3" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</g><g id="water">
+<path d="M-20 489H45V573H-20Z" fill="#AFD7DF" />
+<path d="M116 485L132 474H235L286 449H951V465H1075V540H951V557H297L228 591L202 577H150L143 570H116Z" fill="#AFD7DF" stroke="#82BAC7" stroke-width="2" />
+<path d="M1100 770L1190 785V897L1100 863Z" fill="#AFD7DF" stroke="#82BAC7" stroke-width="2" />
+</g><g id="paths" fill="none" stroke="#F8F8F3" stroke-width="8" stroke-linejoin="round">
+<path d="M220 289H787L959 300"/>
+<path d="M389 245L478 386"/>
+<path d="M415 300L610 388"/>
+<path d="M622 298L702 369L786 299"/>
+<path d="M703 299V426"/>
+<path d="M793 300V426"/>
+<path d="M815 388L953 305"/>
+<path d="M396 388H961"/>
+<path d="M220 418H970"/>
+<path d="M249 255V355H277"/>
+<path d="M276 281H252M276 310H252M276 337H252"/>
+<path d="M353 667H953"/>
+<path d="M451 580V668"/>
+<path d="M510 580V668"/>
+<path d="M670 580V668"/>
+<path d="M795 580V668"/>
+<path d="M517 583L637 664"/>
+<path d="M343 598L292 697"/>
+<path d="M302 703L350 676"/>
+<path d="M760 680V723H953"/>
+<path d="M729 750H957"/>
+<path d="M995 865L1039 937L1097 873"/>
+<path d="M1046 854V953"/>
+</g><g id="bridges">
+<rect x="174" y="446" width="34" height="134" rx="0" fill="#E1E5E3" stroke="#83938E" stroke-width="1.4"/>
+<rect x="337" y="445" width="19" height="113" rx="0" fill="#E1E5E3" stroke="#83938E" stroke-width="1.4"/>
+<path d="M342 450V553" fill="none" stroke="#F8F8F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="974" y="438" width="34" height="137" rx="0" fill="#E1E5E3" stroke="#83938E" stroke-width="1.4"/>
+<rect x="945" y="752" width="82" height="18" rx="0" fill="#E1E5E3" stroke="#83938E" stroke-width="1.4"/>
+</g><g id="buildings">
+<path d="M252 69L441 78V110L250 100Z" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M231 131L355 139V194L231 187Z" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M407 155L592 164V211L407 201Z" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M474 77L516 80V115H474Z" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M529 120L592 124V151L529 148Z" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M619 143H717V198H619Z" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M772 158H827V216H772Z" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M910 184H984V169H1023V225H910Z" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M113 257H145V338H113Z" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M1013 289H1062V376H1013Z" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M111 630H154V818H111Z" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M224 623H245V672H224Z" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M221 389H238V438H221Z" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M224 450H279L245 469H224Z" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M225 888H282V946H225Z" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M294 896H417V944H294Z" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M458 886H519V944H458Z" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M603 890H943V946H603Z" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M687 750H713V793H687Z" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M289 253H383V355H289Z" fill="#AEC5A0" stroke="#83938E" stroke-width="1.8" />
+<rect x="299" y="268" width="75" height="79" rx="0" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8"/>
+<rect x="316" y="349" width="39" height="18" rx="0" fill="#E1E5E3" stroke="#83938E" stroke-width="1"/>
+<path d="M447 713H563V675H675V795H447Z" fill="#AEC5A0" stroke="#83938E" stroke-width="1.8" />
+<rect x="459" y="733" width="74" height="46" rx="0" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8"/>
+<rect x="574" y="695" width="80" height="84" rx="0" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8"/>
+<rect x="591" y="712" width="46" height="47" rx="0" fill="#AFD7DF" stroke="#83938E" stroke-width="1.3"/>
+<rect x="734" y="783" width="218" height="20" rx="0" fill="#AEC5A0" stroke="#83938E" stroke-width="1.8"/>
+<rect x="975" y="785" width="19" height="23" rx="0" fill="#AEC5A0" stroke="#83938E" stroke-width="1.5"/>
+<rect x="1006" y="784" width="26" height="19" rx="0" fill="#AEC5A0" stroke="#83938E" stroke-width="1.5"/>
+<circle cx="1052" cy="817" r="16" fill="#E9E4D9" stroke="#83938E" stroke-width="1.8"/>
+</g><g id="trees">
+<circle cx="124" cy="73" r="13" fill="#AEC5A0"/>
+<circle cx="131" cy="137" r="12" fill="#AEC5A0"/>
+<circle cx="131" cy="198" r="13" fill="#AEC5A0"/>
+<circle cx="202" cy="265" r="11" fill="#AEC5A0"/>
+<circle cx="203" cy="323" r="11" fill="#AEC5A0"/>
+<circle cx="202" cy="365" r="11" fill="#AEC5A0"/>
+<circle cx="258" cy="224" r="12" fill="#AEC5A0"/>
+<circle cx="321" cy="231" r="10" fill="#AEC5A0"/>
+<circle cx="369" cy="225" r="12" fill="#AEC5A0"/>
+<circle cx="427" cy="245" r="14" fill="#AEC5A0"/>
+<circle cx="485" cy="252" r="11" fill="#AEC5A0"/>
+<circle cx="550" cy="254" r="10" fill="#AEC5A0"/>
+<circle cx="643" cy="257" r="14" fill="#AEC5A0"/>
+<circle cx="760" cy="262" r="15" fill="#AEC5A0"/>
+<circle cx="831" cy="275" r="12" fill="#AEC5A0"/>
+<circle cx="901" cy="276" r="10" fill="#AEC5A0"/>
+<circle cx="949" cy="280" r="12" fill="#AEC5A0"/>
+<circle cx="411" cy="329" r="11" fill="#AEC5A0"/>
+<circle cx="464" cy="344" r="12" fill="#AEC5A0"/>
+<circle cx="500" cy="322" r="10" fill="#AEC5A0"/>
+<circle cx="554" cy="354" r="11" fill="#AEC5A0"/>
+<circle cx="610" cy="336" r="12" fill="#AEC5A0"/>
+<circle cx="658" cy="353" r="11" fill="#AEC5A0"/>
+<circle cx="728" cy="340" r="10" fill="#AEC5A0"/>
+<circle cx="755" cy="366" r="11" fill="#AEC5A0"/>
+<circle cx="829" cy="339" r="10" fill="#AEC5A0"/>
+<circle cx="868" cy="359" r="12" fill="#AEC5A0"/>
+<circle cx="917" cy="367" r="10" fill="#AEC5A0"/>
+<circle cx="412" cy="403" r="10" fill="#AEC5A0"/>
+<circle cx="472" cy="403" r="10" fill="#AEC5A0"/>
+<circle cx="544" cy="405" r="11" fill="#AEC5A0"/>
+<circle cx="617" cy="404" r="11" fill="#AEC5A0"/>
+<circle cx="684" cy="405" r="10" fill="#AEC5A0"/>
+<circle cx="766" cy="403" r="11" fill="#AEC5A0"/>
+<circle cx="826" cy="404" r="10" fill="#AEC5A0"/>
+<circle cx="884" cy="405" r="11" fill="#AEC5A0"/>
+<circle cx="936" cy="405" r="10" fill="#AEC5A0"/>
+<circle cx="382" cy="616" r="13" fill="#AEC5A0"/>
+<circle cx="410" cy="643" r="12" fill="#AEC5A0"/>
+<circle cx="480" cy="617" r="11" fill="#AEC5A0"/>
+<circle cx="480" cy="646" r="11" fill="#AEC5A0"/>
+<circle cx="547" cy="640" r="12" fill="#AEC5A0"/>
+<circle cx="580" cy="622" r="11" fill="#AEC5A0"/>
+<circle cx="619" cy="643" r="11" fill="#AEC5A0"/>
+<circle cx="719" cy="619" r="11" fill="#AEC5A0"/>
+<circle cx="770" cy="643" r="12" fill="#AEC5A0"/>
+<circle cx="838" cy="617" r="11" fill="#AEC5A0"/>
+<circle cx="883" cy="631" r="12" fill="#AEC5A0"/>
+<circle cx="926" cy="615" r="10" fill="#AEC5A0"/>
+<circle cx="313" cy="609" r="10" fill="#AEC5A0"/>
+<circle cx="284" cy="751" r="14" fill="#AEC5A0"/>
+<circle cx="327" cy="758" r="12" fill="#AEC5A0"/>
+<circle cx="386" cy="773" r="11" fill="#AEC5A0"/>
+<circle cx="421" cy="776" r="10" fill="#AEC5A0"/>
+<circle cx="471" cy="693" r="12" fill="#AEC5A0"/>
+<circle cx="519" cy="693" r="10" fill="#AEC5A0"/>
+<circle cx="745" cy="696" r="10" fill="#AEC5A0"/>
+<circle cx="791" cy="698" r="11" fill="#AEC5A0"/>
+<circle cx="841" cy="697" r="10" fill="#AEC5A0"/>
+<circle cx="902" cy="703" r="12" fill="#AEC5A0"/>
+<circle cx="948" cy="691" r="10" fill="#AEC5A0"/>
+<circle cx="782" cy="737" r="10" fill="#AEC5A0"/>
+<circle cx="869" cy="770" r="9" fill="#AEC5A0"/>
+<circle cx="921" cy="759" r="11" fill="#AEC5A0"/>
+<circle cx="1009" cy="707" r="10" fill="#AEC5A0"/>
+<circle cx="1035" cy="601" r="12" fill="#AEC5A0"/>
+<circle cx="1037" cy="649" r="11" fill="#AEC5A0"/>
+<circle cx="1023" cy="856" r="10" fill="#AEC5A0"/>
+<circle cx="1093" cy="867" r="12" fill="#AEC5A0"/>
+<circle cx="1005" cy="914" r="10" fill="#AEC5A0"/>
+<circle cx="258" cy="828" r="10" fill="#AEC5A0"/>
+<circle cx="319" cy="828" r="10" fill="#AEC5A0"/>
+<circle cx="379" cy="829" r="10" fill="#AEC5A0"/>
+<circle cx="428" cy="828" r="10" fill="#AEC5A0"/>
+<circle cx="568" cy="828" r="10" fill="#AEC5A0"/>
+<circle cx="631" cy="828" r="10" fill="#AEC5A0"/>
+<circle cx="693" cy="828" r="10" fill="#AEC5A0"/>
+<circle cx="753" cy="828" r="10" fill="#AEC5A0"/>
+<circle cx="814" cy="828" r="10" fill="#AEC5A0"/>
+<circle cx="875" cy="828" r="10" fill="#AEC5A0"/>
+<circle cx="927" cy="828" r="10" fill="#AEC5A0"/>
+<circle cx="313" cy="874" r="9" fill="#AEC5A0"/>
+<circle cx="390" cy="875" r="9" fill="#AEC5A0"/>
+<circle cx="566" cy="875" r="9" fill="#AEC5A0"/>
+<circle cx="639" cy="874" r="9" fill="#AEC5A0"/>
+<circle cx="734" cy="875" r="9" fill="#AEC5A0"/>
+<circle cx="825" cy="875" r="9" fill="#AEC5A0"/>
+<circle cx="922" cy="874" r="9" fill="#AEC5A0"/>
+<circle cx="813" cy="94" r="12" fill="#AEC5A0"/>
+<circle cx="811" cy="133" r="11" fill="#AEC5A0"/>
+<circle cx="868" cy="168" r="12" fill="#AEC5A0"/>
+<circle cx="868" cy="220" r="11" fill="#AEC5A0"/>
+<circle cx="905" cy="105" r="12" fill="#AEC5A0"/>
+<circle cx="1018" cy="142" r="12" fill="#AEC5A0"/>
+<circle cx="1045" cy="184" r="11" fill="#AEC5A0"/>
+<circle cx="1040" cy="234" r="10" fill="#AEC5A0"/>
+<circle cx="566" cy="86" r="11" fill="#AEC5A0"/>
+<circle cx="30" cy="241" r="13" fill="#AEC5A0"/>
+<circle cx="28" cy="311" r="12" fill="#AEC5A0"/>
+<circle cx="31" cy="405" r="13" fill="#AEC5A0"/>
+<circle cx="32" cy="651" r="12" fill="#AEC5A0"/>
+<circle cx="28" cy="737" r="13" fill="#AEC5A0"/>
+<circle cx="28" cy="823" r="12" fill="#AEC5A0"/>
+<circle cx="27" cy="921" r="12" fill="#AEC5A0"/>
+<circle cx="306" cy="1033" r="13" fill="#AEC5A0"/>
+<circle cx="375" cy="1036" r="12" fill="#AEC5A0"/>
+<circle cx="424" cy="1030" r="12" fill="#AEC5A0"/>
+<circle cx="828" cy="1034" r="12" fill="#AEC5A0"/>
+<circle cx="893" cy="1035" r="12" fill="#AEC5A0"/>
+<circle cx="974" cy="1033" r="13" fill="#AEC5A0"/>
+<circle cx="1058" cy="1033" r="12" fill="#AEC5A0"/>
+</g><g id="labels">
+<text x="575" y="514" font-size="19" fill="#487E8A" text-anchor="middle" letter-spacing="1.5">Исетский пруд</text>
+<path d="M699 508H740M732 502L740 508L732 514" fill="none" stroke="#487E8A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="614" y="49" font-size="16" fill="#293F47" text-anchor="middle" transform="rotate(2.8 614 49)" letter-spacing="1">ул. Горького</text>
+<text x="70" y="425" font-size="16" fill="#293F47" text-anchor="middle" transform="rotate(-90 70 425)" letter-spacing="1">ул. Бориса Ельцина</text>
+<text x="649" y="997" font-size="16" fill="#293F47" text-anchor="middle" letter-spacing="1">ул. Челюскинцев</text>
+</g><g id="landmark-numbers" text-anchor="middle" font-size="15" font-weight="600">
+<g id="landmark-1"><circle cx="1052" cy="817" r="15" fill="#F8F8F3" stroke="#293F47" stroke-width="1.6"/><text x="1052" y="822.2" fill="#293F47">1</text></g>
+<g id="landmark-2"><circle cx="1100" cy="876" r="15" fill="#F8F8F3" stroke="#293F47" stroke-width="1.6"/><text x="1100" y="881.2" fill="#293F47">2</text></g>
+<g id="landmark-3"><circle cx="907" cy="918" r="15" fill="#F8F8F3" stroke="#293F47" stroke-width="1.6"/><text x="907" y="923.2" fill="#293F47">3</text></g>
+<g id="landmark-4"><circle cx="652" cy="918" r="15" fill="#F8F8F3" stroke="#293F47" stroke-width="1.6"/><text x="652" y="923.2" fill="#293F47">4</text></g>
+<g id="landmark-5"><circle cx="614" cy="738" r="15" fill="#F8F8F3" stroke="#293F47" stroke-width="1.6"/><text x="614" y="743.2" fill="#293F47">5</text></g>
+<g id="landmark-6"><circle cx="252" cy="913" r="15" fill="#F8F8F3" stroke="#293F47" stroke-width="1.6"/><text x="252" y="918.2" fill="#293F47">6</text></g>
+<g id="landmark-7"><circle cx="841" cy="793" r="15" fill="#F8F8F3" stroke="#293F47" stroke-width="1.6"/><text x="841" y="798.2" fill="#293F47">7</text></g>
+<g id="landmark-8"><circle cx="132" cy="724" r="15" fill="#F8F8F3" stroke="#293F47" stroke-width="1.6"/><text x="132" y="729.2" fill="#293F47">8</text></g>
+<g id="landmark-9"><circle cx="236" cy="644" r="15" fill="#F8F8F3" stroke="#293F47" stroke-width="1.6"/><text x="236" y="649.2" fill="#293F47">9</text></g>
+<g id="landmark-10"><circle cx="199" cy="456" r="15" fill="#F8F8F3" stroke="#293F47" stroke-width="1.6"/><text x="199" y="461.2" fill="#293F47">10</text></g>
+<g id="landmark-11"><circle cx="336" cy="307" r="15" fill="#F8F8F3" stroke="#293F47" stroke-width="1.6"/><text x="336" y="312.2" fill="#293F47">11</text></g>
+<g id="landmark-12"><circle cx="260" cy="163" r="15" fill="#F8F8F3" stroke="#293F47" stroke-width="1.6"/><text x="260" y="168.2" fill="#293F47">12</text></g>
+<g id="landmark-13"><circle cx="524" cy="181" r="15" fill="#F8F8F3" stroke="#293F47" stroke-width="1.6"/><text x="524" y="186.2" fill="#293F47">13</text></g>
+<g id="landmark-14"><circle cx="797" cy="184" r="15" fill="#F8F8F3" stroke="#293F47" stroke-width="1.6"/><text x="797" y="189.2" fill="#293F47">14</text></g>
+<g id="landmark-15"><circle cx="935" cy="204" r="15" fill="#F8F8F3" stroke="#293F47" stroke-width="1.6"/><text x="935" y="209.2" fill="#293F47">15</text></g>
+<g id="landmark-16"><circle cx="1048" cy="248" r="15" fill="#F8F8F3" stroke="#293F47" stroke-width="1.6"/><text x="1048" y="253.2" fill="#293F47">16</text></g>
+</g><g id="north-arrow" transform="translate(31 72)">
+<text x="0" y="-24" font-size="13" fill="#293F47" text-anchor="middle" font-weight="600">С</text>
+<path d="M0 -13L-9 13L0 7L9 13Z" fill="#293F47" />
+</g></svg><text x="1154" y="174" font-size="13" fill="#75857F" letter-spacing="2.5" font-weight="600">ОБЪЕКТЫ НА КАРТЕ</text>
+<circle cx="1169" cy="213" r="14" fill="none" stroke="#293F47" stroke-width="1.4"/>
+<text x="1169" y="218" font-size="14" fill="#293F47" text-anchor="middle" font-weight="600">1</text>
+<text x="1198" y="218" font-size="17" fill="#293F47" >Водонапорная башня</text>
+<circle cx="1169" cy="258" r="14" fill="none" stroke="#293F47" stroke-width="1.4"/>
+<text x="1169" y="263" font-size="14" fill="#293F47" text-anchor="middle" font-weight="600">2</text>
+<text x="1198" y="263" font-size="17" fill="#293F47" >Ворота</text>
+<circle cx="1169" cy="303" r="14" fill="none" stroke="#293F47" stroke-width="1.4"/>
+<text x="1169" y="308" font-size="14" fill="#293F47" text-anchor="middle" font-weight="600">3</text>
+<text x="1198" y="308" font-size="17" fill="#293F47" >Производственный корпус</text>
+<circle cx="1169" cy="348" r="14" fill="none" stroke="#293F47" stroke-width="1.4"/>
+<text x="1169" y="353" font-size="14" fill="#293F47" text-anchor="middle" font-weight="600">4</text>
+<text x="1198" y="353" font-size="17" fill="#293F47" >Здание кладовых</text>
+<circle cx="1169" cy="393" r="14" fill="none" stroke="#293F47" stroke-width="1.4"/>
+<text x="1169" y="398" font-size="14" fill="#293F47" text-anchor="middle" font-weight="600">5</text>
+<text x="1198" y="398" font-size="17" fill="#293F47" >Дом чертежников</text>
+<circle cx="1169" cy="438" r="14" fill="none" stroke="#293F47" stroke-width="1.4"/>
+<text x="1169" y="443" font-size="14" fill="#293F47" text-anchor="middle" font-weight="600">6</text>
+<text x="1198" y="443" font-size="17" fill="#293F47" >Ворота</text>
+<circle cx="1169" cy="483" r="14" fill="none" stroke="#293F47" stroke-width="1.4"/>
+<text x="1169" y="488" font-size="14" fill="#293F47" text-anchor="middle" font-weight="600">7</text>
+<text x="1198" y="488" font-size="17" fill="#293F47" >Стена главного корпуса</text>
+<circle cx="1169" cy="528" r="14" fill="none" stroke="#293F47" stroke-width="1.4"/>
+<text x="1169" y="533" font-size="14" fill="#293F47" text-anchor="middle" font-weight="600">8</text>
+<text x="1198" y="533" font-size="17" fill="#293F47" >Сушильный корпус</text>
+<circle cx="1169" cy="573" r="14" fill="none" stroke="#293F47" stroke-width="1.4"/>
+<text x="1169" y="578" font-size="14" fill="#293F47" text-anchor="middle" font-weight="600">9</text>
+<text x="1198" y="578" font-size="17" fill="#293F47" >Мост через реку Исеть</text>
+<circle cx="1169" cy="618" r="14" fill="none" stroke="#293F47" stroke-width="1.4"/>
+<text x="1169" y="623" font-size="14" fill="#293F47" text-anchor="middle" font-weight="600">10</text>
+<text x="1198" y="623" font-size="17" fill="#293F47" >Гранитные устои моста</text>
+<text x="1198" y="646" font-size="17" fill="#293F47" >через реку Исеть</text>
+<circle cx="1169" cy="681" r="14" fill="none" stroke="#293F47" stroke-width="1.4"/>
+<text x="1169" y="686" font-size="14" fill="#293F47" text-anchor="middle" font-weight="600">11</text>
+<text x="1198" y="686" font-size="17" fill="#293F47" >Гостиный Екатеринбургского</text>
+<text x="1198" y="709" font-size="17" fill="#293F47" >завода, где состоялось первое</text>
+<text x="1198" y="732" font-size="17" fill="#293F47" >театрализованное представление</text>
+<circle cx="1169" cy="767" r="14" fill="none" stroke="#293F47" stroke-width="1.4"/>
+<text x="1169" y="772" font-size="14" fill="#293F47" text-anchor="middle" font-weight="600">12</text>
+<text x="1198" y="772" font-size="17" fill="#293F47" >Остатки стен</text>
+<circle cx="1169" cy="812" r="14" fill="none" stroke="#293F47" stroke-width="1.4"/>
+<text x="1169" y="817" font-size="14" fill="#293F47" text-anchor="middle" font-weight="600">13</text>
+<text x="1198" y="817" font-size="17" fill="#293F47" >Трап</text>
+<circle cx="1169" cy="857" r="14" fill="none" stroke="#293F47" stroke-width="1.4"/>
+<text x="1169" y="862" font-size="14" fill="#293F47" text-anchor="middle" font-weight="600">14</text>
+<text x="1198" y="862" font-size="17" fill="#293F47" >Ворота</text>
+<circle cx="1169" cy="902" r="14" fill="none" stroke="#293F47" stroke-width="1.4"/>
+<text x="1169" y="907" font-size="14" fill="#293F47" text-anchor="middle" font-weight="600">15</text>
+<text x="1198" y="907" font-size="17" fill="#293F47" >Остатки древней плотины</text>
+<text x="1198" y="930" font-size="17" fill="#293F47" >Исетского пруда с фрагментами</text>
+<text x="1198" y="953" font-size="17" fill="#293F47" >в местах нахождения водосбросов</text>
+<circle cx="1169" cy="988" r="14" fill="none" stroke="#293F47" stroke-width="1.4"/>
+<text x="1169" y="993" font-size="14" fill="#293F47" text-anchor="middle" font-weight="600">16</text>
+<text x="1198" y="993" font-size="17" fill="#293F47" >Дом церковников</text>
+<path d="M1154 1085H1549" fill="none" stroke="#D9DFD8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="1156" y="1110" width="16" height="16" rx="3" fill="#AFD7DF"/>
+<text x="1181" y="1123" font-size="14" fill="#65776D" >Вода</text>
+<rect x="1260" y="1110" width="16" height="16" rx="3" fill="#DCE6D1"/>
+<text x="1285" y="1123" font-size="14" fill="#65776D" >Парк</text>
+<rect x="1365" y="1110" width="16" height="16" rx="3" fill="#E9E4D9"/>
+<text x="1390" y="1123" font-size="14" fill="#65776D" >Здания</text></svg>
