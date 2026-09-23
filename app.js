@@ -115,21 +115,46 @@ const renderers = {
   },
   point: renderPoint,
   finish: () => `<section class="screen finish-screen" aria-labelledby="screen-title"><div class="finish-copy"><p class="eyebrow">МАРШРУТ ПРОЙДЕН</p><p class="finish-count">${visited.size} <span>/ ${points.length}</span></p>${screenTitle(site.finishTitle)}<p class="description">${escapeHTML(site.finishText)}</p></div><div class="finish-visual">${mascotMarkup(site.finishMascot)}${mapMarkup(visited.size, points.length - 1, false, true)}</div><div class="actions finish-actions">${buttonMarkup('Посмотреть нашу концепцию')}${buttonMarkup('Пройти ещё раз', 'restart', true)}</div></section>`,
-  presentation: () => `<section class="screen presentation-screen" aria-labelledby="screen-title"><header class="presentation-heading">${buttonMarkup('Назад', 'back', true)}${screenTitle(site.presentationTitle)}</header><div class="presentation-content" aria-live="polite"><div class="presentation-placeholder"><span class="presentation-symbol" aria-hidden="true">Гид</span><p class="eyebrow">ИДЕИ ДЛЯ ГОРОДА</p><h2>${escapeHTML(site.presentationPlaceholder)}</h2><p>${escapeHTML(site.presentationText)}</p></div></div></section>`
+  presentation: () => `<section class="screen presentation-screen" aria-labelledby="screen-title"><header class="presentation-heading">${buttonMarkup('Назад', 'back', true)}${screenTitle(site.presentationTitle)}</header><a class="secondary-button pdf-fallback" href="${escapeHTML(site.presentationPath)}" target="_blank" rel="noopener">Открыть оригинал PDF <span aria-hidden="true">↗</span></a><div class="presentation-content" aria-live="polite" aria-busy="true"><p class="presentation-status" role="status">Загружаем слайды…</p></div></section>`
 };
 async function bindPresentation(version) {
   const container = app.querySelector('.presentation-content');
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 12000);
+  const isCurrent = () => version === renderVersion && state === 'presentation' && container.isConnected;
   try {
-    const response = await fetch(site.presentationPath);
-    if (!response.ok) return;
-    const blob = await response.blob();
-    // The empty tracked file is a replace-in-place placeholder, not a PDF document.
-    if (!blob.size || !(await blob.slice(0, 5).text()).startsWith('%PDF-')) return;
-    if (version !== renderVersion || state !== 'presentation' || !container.isConnected) return;
-    const path = escapeHTML(site.presentationPath);
-    container.innerHTML = `<a class="secondary-button pdf-fallback" href="${path}" target="_blank" rel="noopener">Открыть презентацию <span aria-hidden="true">↗</span></a><object class="pdf-viewer" data="${path}" type="application/pdf" aria-label="Презентация проекта"><p>Откройте презентацию по ссылке выше.</p></object>`;
-  } catch { /* Offline or missing PDF leaves the same friendly placeholder. */ }
+    // Load only a small index. Native PDF embeds are not needed on phones.
+    const response = await fetch(site.presentationSlides, { signal: controller.signal, cache: 'no-cache' });
+    if (!response.ok) throw new Error('Slides unavailable');
+    const manifest = await response.json();
+    if (!Array.isArray(manifest.slides) || !manifest.slides.length ||
+        !manifest.slides.every(slide => /^slide-\d+\.jpg$/.test(slide.image) && slide.width > 0 && slide.height > 0)) {
+      throw new Error('Invalid slide index');
+    }
+    if (!isCurrent()) return;
+    const folder = site.presentationSlides.slice(0, site.presentationSlides.lastIndexOf('/') + 1);
+    const revision = encodeURIComponent(manifest.sourceSha256 || '');
+    container.innerHTML = `<p class="presentation-hint">${manifest.slides.length} слайдов · листайте вниз. Нажмите на слайд, чтобы открыть крупнее.</p><ol class="presentation-slides">${manifest.slides.map((slide, index) => {
+      const image = escapeHTML(`${folder}${slide.image}?v=${revision}`);
+      const title = escapeHTML(slide.title || `Слайд ${index + 1}`);
+      return `<li><figure class="presentation-slide"><a href="${image}" target="_blank" rel="noopener" aria-label="Открыть слайд ${index + 1} крупнее: ${title}"><img src="${image}" width="${slide.width}" height="${slide.height}" alt="${title}" loading="${index === 0 ? 'eager' : 'lazy'}" decoding="async"><figcaption><span>Слайд ${index + 1} / ${manifest.slides.length}</span><span aria-hidden="true">Увеличить ↗</span></figcaption></a><p class="slide-error" hidden>Не удалось загрузить этот слайд. Оригинал доступен по ссылке PDF выше.</p></figure></li>`;
+    }).join('')}</ol>`;
+    container.querySelectorAll('.presentation-slide img').forEach(image => {
+      const fallback = () => {
+        image.hidden = true;
+        image.closest('figure').querySelector('.slide-error').hidden = false;
+      };
+      image.addEventListener('error', fallback, { once: true });
+      if (image.complete && !image.naturalWidth) fallback();
+    });
+  } catch {
+    if (isCurrent()) container.innerHTML = `<div class="presentation-load-error"><p>Не удалось загрузить слайды. Можно попробовать ещё раз или открыть оригинал PDF по ссылке выше.</p>${buttonMarkup('Попробовать ещё раз', 'retry-presentation', true)}</div>`;
+  } finally {
+    window.clearTimeout(timeout);
+    if (isCurrent()) container.setAttribute('aria-busy', 'false');
+  }
 }
+
 function render(moveFocus = false) {
   const current = states[state];
   app.innerHTML = renderers[current.kind](current);
@@ -173,6 +198,13 @@ app.addEventListener('click', event => {
       viewport.scrollLeft = viewport.scrollWidth * x / mapConfig.frame.height - viewport.clientWidth / 2;
       viewport.scrollTop = viewport.scrollHeight * y / mapConfig.frame.width - viewport.clientHeight / 2;
     } else { viewport.scrollLeft = 0; viewport.scrollTop = 0; }
+    return;
+  }
+  if (action === 'retry-presentation' && state === 'presentation') {
+    const container = app.querySelector('.presentation-content');
+    container.setAttribute('aria-busy', 'true');
+    container.innerHTML = '<p class="presentation-status" role="status">Загружаем слайды…</p>';
+    bindPresentation(++renderVersion);
     return;
   }
   if (action === 'restart') { transitionTo('welcome'); return; }

@@ -128,7 +128,7 @@ button:disabled { cursor: default; }
 .story-description .eyebrow { margin-bottom: 8px; }
 .point-story .actions { margin-top: 30px; }
 
-/* Finish and the deliberately simple native PDF view. */
+/* Finish and progressively loaded presentation slides. */
 .finish-count { margin: 16px 0 22px; font-size: 68px; line-height: 1; letter-spacing: -.075em; }
 .finish-count span { color: var(--color-muted); font-size: 32px; }
 .finish-visual { display: flex; align-items: center; gap: 16px; margin: 30px 0; }
@@ -143,7 +143,15 @@ button:disabled { cursor: default; }
 .presentation-placeholder h2 { font-size: 34px; }
 .presentation-placeholder > p:last-child { margin-top: 18px; font-size: 16px; line-height: 1.6; color: var(--color-muted); }
 .pdf-fallback { margin-bottom: 14px; }
-.pdf-viewer { width: 100%; height: 75svh; min-height: 480px; border: 1px solid var(--color-line); background: var(--color-surface); }
+.presentation-status, .presentation-load-error { padding: 28px 0; font-size: 16px; line-height: 1.6; }
+.presentation-load-error .secondary-button { margin-top: 20px; }
+.presentation-hint { margin: 16px 0 24px; font-size: 14px; line-height: 1.5; color: var(--color-muted); }
+.presentation-slides { display: grid; gap: 26px; list-style: none; padding: 0; margin: 0; }
+.presentation-slide { margin: 0; }
+.presentation-slide a { display: block; color: var(--color-text); text-decoration: none; }
+.presentation-slide img { display: block; width: 100%; height: auto; background: var(--color-soft); border: 1px solid var(--color-line); }
+.presentation-slide figcaption { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; font-size: 12px; color: var(--color-muted); }
+.slide-error { padding: 18px; background: var(--color-soft); font-size: 14px; line-height: 1.5; }
 
 @keyframes screen-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 @keyframes draw-route { to { stroke-dashoffset: 0; } }

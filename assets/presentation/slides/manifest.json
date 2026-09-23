@@ -1,0 +1,72 @@
+{
+  "source": "../presentation.pdf",
+  "sourceSha256": "7e8f4da409e466351a71302d8d43addecb2decf826d988b86291b0ab0c46cd74",
+  "slides": [
+    {
+      "image": "slide-01.jpg",
+      "width": 1600,
+      "height": 901,
+      "title": "ГОРОД — ХОЛСТ"
+    },
+    {
+      "image": "slide-02.jpg",
+      "width": 1600,
+      "height": 901,
+      "title": "02 Букашкин как проводник концепции"
+    },
+    {
+      "image": "slide-03.jpg",
+      "width": 1600,
+      "height": 901,
+      "title": "03 Музыкальная сцена: творчество на каждом шагу"
+    },
+    {
+      "image": "slide-04.jpg",
+      "width": 1600,
+      "height": 901,
+      "title": "04 Береговая зона: отдых, медные навесы"
+    },
+    {
+      "image": "slide-05.jpg",
+      "width": 1600,
+      "height": 901,
+      "title": "05 Пленэрная зона: место для художников"
+    },
+    {
+      "image": "slide-06.jpg",
+      "width": 1600,
+      "height": 901,
+      "title": "06 Выставочное пространство у южных ворот"
+    },
+    {
+      "image": "slide-07.jpg",
+      "width": 1600,
+      "height": 901,
+      "title": "07 Плоты у моста любви: выход к воде"
+    },
+    {
+      "image": "slide-08.jpg",
+      "width": 1600,
+      "height": 901,
+      "title": "08 Сад камней и тропа здоровья"
+    },
+    {
+      "image": "slide-09.jpg",
+      "width": 1600,
+      "height": 901,
+      "title": "09 Место для детского воображения"
+    },
+    {
+      "image": "slide-10.jpg",
+      "width": 1600,
+      "height": 901,
+      "title": "10 Интерактивный маршрут с Б.У. Кашкиным"
+    },
+    {
+      "image": "slide-11.jpg",
+      "width": 1600,
+      "height": 901,
+      "title": "Спасибо за внимание!"
+    }
+  ]
+}

@@ -23,6 +23,7 @@ const site = {
   "presentationPlaceholder": "Презентация будет добавлена сюда",
   "presentationText": "Здесь мы расскажем, какой видим Плотинку завтра.",
   "presentationPath": "./assets/presentation/presentation.pdf",
+  "presentationSlides": "./assets/presentation/slides/manifest.json",
   "welcomeMascot": {
     "image": "welcome.png",
     "cutout": false,
