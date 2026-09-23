@@ -107,7 +107,7 @@ function renderPoint(current) {
   </section>`;
 }
 const renderers = {
-  welcome: () => `<section class="screen welcome-screen" aria-labelledby="screen-title"><div class="welcome-copy"><p class="eyebrow">${escapeHTML(site.welcomeEyebrow)}</p>${screenTitle(site.title, 'intro-title')}<p class="subtitle">${escapeHTML(site.subtitle)}</p></div><div class="welcome-visual"><span class="orbit-word" aria-hidden="true">ПРИВЕТ, ГОРОД!</span>${mascotMarkup({ ...site.welcomeMascot, speech: site.welcomeSpeech }, 'welcome-mascot')}</div><div class="welcome-bottom"><div class="meta"><span>${points.length} точек</span><span>≈ ${escapeHTML(site.duration)}</span><span>Пешком</span></div><div class="actions">${buttonMarkup('Начать прогулку')}</div></div></section>`,
+  welcome: () => `<section class="screen welcome-screen" aria-labelledby="screen-title"><div class="welcome-copy"><p class="eyebrow">${escapeHTML(site.welcomeEyebrow)}</p>${screenTitle(site.title, 'intro-title')}<p class="subtitle">${escapeHTML(site.subtitle)}</p></div><div class="welcome-visual"><span class="orbit-word" aria-hidden="true">Здорово, город! Ну, удивляй!</span>${mascotMarkup({ ...site.welcomeMascot, speech: site.welcomeSpeech }, 'welcome-mascot')}</div><div class="welcome-bottom"><div class="meta"><span>${points.length} точек</span><span>≈ ${escapeHTML(site.duration)}</span><span>Пешком</span></div><div class="actions">${buttonMarkup('Начать прогулку')}</div></div></section>`,
   map: current => {
     const point = points[current.index];
     const draw = current.index > 0;
@@ -115,7 +115,7 @@ const renderers = {
   },
   point: renderPoint,
   finish: () => `<section class="screen finish-screen" aria-labelledby="screen-title"><div class="finish-copy"><p class="eyebrow">МАРШРУТ ПРОЙДЕН</p><p class="finish-count">${visited.size} <span>/ ${points.length}</span></p>${screenTitle(site.finishTitle)}<p class="description">${escapeHTML(site.finishText)}</p></div><div class="finish-visual">${mascotMarkup(site.finishMascot)}${mapMarkup(visited.size, points.length - 1, false, true)}</div><div class="actions finish-actions">${buttonMarkup('Посмотреть нашу концепцию')}${buttonMarkup('Пройти ещё раз', 'restart', true)}</div></section>`,
-  presentation: () => `<section class="screen presentation-screen" aria-labelledby="screen-title"><header class="presentation-heading">${buttonMarkup('Назад', 'back', true)}${screenTitle(site.presentationTitle)}</header><div class="presentation-content" aria-live="polite"><div class="presentation-placeholder"><span class="presentation-symbol" aria-hidden="true">п.</span><p class="eyebrow">ИДЕИ ДЛЯ ГОРОДА</p><h2>${escapeHTML(site.presentationPlaceholder)}</h2><p>${escapeHTML(site.presentationText)}</p></div></div></section>`
+  presentation: () => `<section class="screen presentation-screen" aria-labelledby="screen-title"><header class="presentation-heading">${buttonMarkup('Назад', 'back', true)}${screenTitle(site.presentationTitle)}</header><div class="presentation-content" aria-live="polite"><div class="presentation-placeholder"><span class="presentation-symbol" aria-hidden="true">Гид</span><p class="eyebrow">ИДЕИ ДЛЯ ГОРОДА</p><h2>${escapeHTML(site.presentationPlaceholder)}</h2><p>${escapeHTML(site.presentationText)}</p></div></div></section>`
 };
 async function bindPresentation(version) {
   const container = app.querySelector('.presentation-content');
@@ -136,7 +136,7 @@ function render(moveFocus = false) {
   app.dataset.state = state;
   app.dataset.view = current.kind;
   app.setAttribute('aria-busy', 'false');
-  document.getElementById('footer-count').textContent = `ДЕМО / ${number(points.length)} ТОЧЕК`;
+  document.getElementById('footer-count').textContent = `всем привет от ии спеца <3`;
   bindOptionalImages();
   const version = ++renderVersion;
   if (current.kind === 'presentation') bindPresentation(version);
