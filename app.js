@@ -1,329 +1,188 @@
 'use strict';
 
-// Historical IDs follow the user's scheme. Coordinates and route bends are percentages.
-// TODO: fine-tune against final map — anchors match the numbered positions in the supplied SVG; verify historical placement on site.
-// markerOffset moves only the number badge; x/y remain the object and route anchor.
-const points = [
-  {
-    id: 1, title: 'Водонапорная башня', shortTitle: 'Водонапорная башня',
-    chapterNumber: 1, chapter: 'НАЧАЛО ЕКАТЕРИНБУРГА', type: 'standard',
-    description: 'Начнём с водонапорной башни. Она помогает увидеть в привычном городском пространстве следы заводского комплекса. На этой прогулке будем замечать не только здания, но и входы, стены, переходы и воду, которые связывали территорию воедино.',
-    art: 'tower', theme: 'ВОДА / НАЧАЛО', x: 93.929, y: 78.332, labelX: 89.286, labelY: 71.908, markerOffset: [0, 0], minutes: 0, route: []
-  },
-  {
-    id: 2, title: 'Ворота Екатеринбургского завода', shortTitle: 'Ворота',
-    chapterNumber: 1, chapter: 'НАЧАЛО ЕКАТЕРИНБУРГА', type: 'gate', gateIndex: 1,
-    description: 'На территории сохранилось несколько ворот. Они отмечают входы в комплекс и помогают представить его границы. По пути встретим ещё трое ворот — попробуйте заметить, что у них общего и чем они отличаются.',
-    art: 'museum', theme: 'ВХОД / ГРАНИЦА', x: 98.214, y: 83.988, labelX: 89.286, labelY: 91.659, markerOffset: [-2.679, 1.438], minutes: 1, route: [[93.929, 81.496], [98.214, 81.496]]
-  },
-  {
-    id: 3, title: 'Производственный корпус', shortTitle: 'Производственный корпус',
-    chapterNumber: 2, chapter: 'ГОРОД-ЗАВОД', type: 'standard',
-    description: 'Название этого здания возвращает нас к производственной жизни территории. Представьте комплекс не как отдельные памятники, а как связанное пространство работы. Посмотрите, как корпус расположен относительно соседних зданий и проходов.',
-    art: 'tower', theme: 'ТРУД / МАСШТАБ', x: 80.982, y: 88.015, labelX: 80.804, labelY: 95.877, markerOffset: [0, 0], minutes: 2, route: [[97.321, 81.879], [87.768, 81.879], [85.714, 81.879], [80.982, 81.879]]
-  },
-  {
-    id: 4, title: 'Здание кладовых', shortTitle: 'Здание кладовых',
-    chapterNumber: 2, chapter: 'ГОРОД-ЗАВОД', type: 'standard',
-    description: 'У заводского комплекса была и повседневная сторона: вещи нужно было хранить и перемещать. Название «кладовые» напоминает об этой работе. Найдите взглядом входы и попробуйте представить, как ими пользовались.',
-    art: 'water', theme: 'ВЕЩИ / ПОРЯДОК', x: 58.214, y: 88.015, labelX: 58.036, labelY: 95.877, markerOffset: [0, 0], minutes: 1, route: [[80.982, 81.879], [58.214, 81.879]]
-  },
-  {
-    id: 5, title: 'Дом чертежников', shortTitle: 'Дом чертежников',
-    chapterNumber: 2, chapter: 'ГОРОД-ЗАВОД', type: 'standard',
-    description: 'За любой постройкой стоит замысел. Дом чертежников предлагает взглянуть на завод через работу с линиями, размерами и планами. От чертежа на бумаге — к зданию и целому городскому пространству.',
-    art: 'museum', theme: 'ЛИНИЯ / ЗАМЫСЕЛ', x: 54.821, y: 70.757, labelX: 50.446, labelY: 62.32, markerOffset: [0, 0], minutes: 2, route: [[58.214, 81.879], [60.893, 80.058], [60.893, 70.757]]
-  },
-  {
-    id: 6, title: 'Ворота', shortTitle: 'Ворота', storyTitle: 'Ещё одни ворота',
-    chapterNumber: 3, chapter: 'СЛЕДЫ ЗАВОДА', type: 'gate', gateIndex: 2, compact: true,
-    description: 'Ты нашёл второй сохранившийся вход в комплекс. Сравни его с первыми воротами: похожи ли пропорции и детали?',
-    art: 'tower', theme: 'ВХОД / НАХОДКА', x: 22.5, y: 87.536, labelX: 22.768, labelY: 95.877, markerOffset: [0, 0], minutes: 1, route: [[60.893, 70.757], [60.893, 80.058], [22.5, 80.058]]
-  },
-  {
-    id: 7, title: 'Ворота', shortTitle: 'Ворота', storyTitle: 'Ещё одни ворота',
-    chapterNumber: 3, chapter: 'СЛЕДЫ ЗАВОДА', type: 'gate', gateIndex: 3, compact: true,
-    description: 'Третий вход найден. Вместе ворота показывают, что заводская территория была связана с городом сразу в нескольких местах.',
-    art: 'water', theme: 'ВХОД / НАХОДКА', x: 75.089, y: 76.031, labelX: 74.107, labelY: 69.511, markerOffset: [0, 0], minutes: 1, route: [[22.5, 80.058], [75.089, 80.058]]
-  },
-  {
-    id: 8, title: 'Стена главного корпуса', shortTitle: 'Стена главного корпуса',
-    chapterNumber: 3, chapter: 'СЛЕДЫ ЗАВОДА', type: 'standard',
-    description: 'Иногда о здании рассказывает то, что от него осталось. Посмотри на линию стены и попробуй мысленно продолжить её. Такой фрагмент помогает представить масштаб прежнего пространства.',
-    hint: 'Перед тобой сохранившийся фрагмент значительно более крупного комплекса.',
-    mascotText: 'Видишь старую кладку? Попробуй проследить, куда продолжается её линия.',
-    art: 'tower', theme: 'ФРАГМЕНТ / ЦЕЛОЕ', x: 11.786, y: 69.415, labelX: 12.054, labelY: 76.222, markerOffset: [0, 0], minutes: 2, route: [[75.089, 80.058], [16.161, 80.058], [16.161, 69.415]]
-  },
-  {
-    id: 9, title: 'Сушильный корпус', shortTitle: 'Сушильный корпус',
-    chapterNumber: 3, chapter: 'СЛЕДЫ ЗАВОДА', type: 'standard',
-    description: 'Ещё одно название, в котором сохранилась память о работе завода. Не будем угадывать детали производства: лучше рассмотрим само здание. Его форма и положение — часть общей истории комплекса.',
-    art: 'museum', theme: 'РАБОТА / ПАМЯТЬ', x: 21.071, y: 61.745, labelX: 25.446, labelY: 55.609, markerOffset: [0, 0], minutes: 1, route: [[16.161, 69.415], [16.161, 68.456], [21.071, 68.456]]
-  },
-  {
-    id: 10, title: 'Мост через реку Исеть', shortTitle: 'Мост через Исеть', storyTitle: 'Перейдём Исеть',
-    chapterNumber: 4, chapter: 'ИСЕТЬ', type: 'bridge', compact: true,
-    description: 'Продолжим маршрут на другой стороне реки.', actionLabel: 'Перейти',
-    hint: 'Остановись на мосту и посмотри на оба берега: вода связывает все части этой истории.',
-    art: 'water', theme: 'БЕРЕГ / ПЕРЕХОД', x: 17.768, y: 43.72, labelX: 13.393, labelY: 37.68, markerOffset: [0, 0], minutes: 2, route: [[21.071, 68.456], [16.161, 68.456], [17.054, 55.321], [17.054, 43.72]]
-  },
-  {
-    id: 11, title: 'Гранитные устои косого моста через реку Исеть', shortTitle: 'Гранитные устои косого моста', storyTitle: 'Гранитные устои',
-    chapterNumber: 4, chapter: 'ИСЕТЬ', type: 'standard',
-    description: 'Устои — след прежнего перехода через реку. Без подсказки их легко принять за часть берега. Найди каменные фрагменты и попробуй представить линию моста между ними.',
-    hintTitle: 'НАЙДИ ЭТО МЕСТО', hint: 'Посмотри на гранит у воды. Это остановка, где важнее заметить деталь, чем увидеть большое здание.',
-    art: 'water', theme: 'КАМЕНЬ / ВОДА', x: 30.0, y: 29.434, labelX: 29.464, labelY: 37.392, markerOffset: [0, 0], minutes: 1, route: [[17.768, 41.227], [34.196, 41.227], [34.196, 35.187], [30.0, 35.187]]
-  },
-  {
-    id: 12, title: 'Госпиталь Екатеринбургского завода, где состоялось первое театрализованное представление', shortTitle: 'Госпиталь Екатеринбургского завода', storyTitle: 'Как завод связан с театром?',
-    chapterNumber: 5, chapter: 'ЗАВОД СТАНОВИТСЯ ГОРОДОМ', type: 'standard',
-    description: 'На исторической схеме госпиталь Екатеринбургского завода отмечен как место первого театрализованного представления. Заводская территория оказывается пространством не только работы, но и человеческой жизни. Здесь история производства встречается с историей культуры.',
-    storySequence: ['Завод', 'Люди', 'Культура', 'Город'],
-    art: 'museum', theme: 'ЛЮДИ / КУЛЬТУРА', x: 23.214, y: 15.628, labelX: 23.214, labelY: 9.588, markerOffset: [0, 0], minutes: 2, route: [[30.0, 35.187], [22.232, 35.187], [22.232, 21.668], [23.214, 21.668]]
-  },
-  {
-    id: 13, title: 'Остатки стен', shortTitle: 'Остатки стен',
-    chapterNumber: 6, chapter: 'СКРЫТАЯ ИСТОРИЯ', type: 'find',
-    prompt: 'Попробуй найти этот фрагмент',
-    description: 'Ты заметил след постройки, которая когда-то была частью большого комплекса. Остатки стен помогают прочитать пространство иначе: не только увидеть то, что есть сейчас, но и задуматься о том, что исчезло.',
-    hint: 'Ищи фрагмент кладки. Не нужно заходить за ограждения или сходить с доступной дорожки.',
-    art: 'tower', theme: 'НАЙТИ / ЗАМЕТИТЬ', x: 46.786, y: 17.354, labelX: 46.875, labelY: 10.547, markerOffset: [0, 0], minutes: 2, route: [[23.214, 21.668], [46.786, 21.668]]
-  },
-  {
-    id: 14, title: 'Грот', shortTitle: 'Грот',
-    chapterNumber: 6, chapter: 'СКРЫТАЯ ИСТОРИЯ', type: 'standard',
-    description: 'У этой остановки другой масштаб и другое настроение. Грот предлагает замедлиться и рассмотреть скрытые детали территории. Иногда самое интересное место не сразу попадает в поле зрения.',
-    mascotText: 'Здесь не нужно спешить. Дай глазам время заметить детали.',
-    art: 'grotto', theme: 'ТИШИНА / ГЛУБИНА', x: 71.161, y: 17.641, labelX: 70.982, labelY: 10.547, markerOffset: [0, 0], minutes: 1, route: [[46.786, 21.668], [71.161, 21.668]]
-  },
-  {
-    id: 15, title: 'Ворота', shortTitle: 'Ворота', storyTitle: 'Все ворота найдены',
-    chapterNumber: 6, chapter: 'СКРЫТАЯ ИСТОРИЯ', type: 'gate', gateIndex: 4, compact: true,
-    description: 'Четвёртые ворота — коллекция собрана. Теперь отдельные входы складываются в образ целой заводской территории.',
-    art: 'museum', theme: 'ВХОД / ОТКРЫТИЕ', x: 83.482, y: 19.559, labelX: 80.357, labelY: 13.423, markerOffset: [0, 0], minutes: 1, route: [[71.161, 21.668], [83.482, 21.668]]
-  },
-  {
-    id: 16, title: 'Остатки древней плотины Исетского пруда с фрагментами в местах нахождения водосбросов', shortTitle: 'Остатки древней плотины', storyTitle: 'Остатки древней плотины',
-    chapterNumber: 6, chapter: 'СКРЫТАЯ ИСТОРИЯ', type: 'final',
-    description: 'Последняя историческая остановка возвращает нас к воде. На схеме отмечены остатки древней плотины Исетского пруда и фрагменты в местах водосбросов. Здесь отдельные находки складываются в общую историю: плотина, завод, город.',
-    art: 'water', theme: 'НАЧАЛО / ПРОДОЛЖЕНИЕ', x: 93.571, y: 23.778, labelX: 90.625, labelY: 31.64, markerOffset: [0, 0], minutes: 2, route: [[83.482, 21.668], [87.768, 21.668], [87.768, 26.27], [93.571, 26.27]],
-    finale: {
-      sequence: ['1723', 'Плотина', 'Завод', 'Город', 'Екатеринбург', '2026'],
-      text: 'Город меняется уже больше трёхсот лет. Теперь история Плотинки продолжается вместе с нами.'
-    }
-  }
-].map(point => ({ image: '', imagePath: `./assets/points/${String(point.id).padStart(2, '0')}.jpg`, hint: '', mascotText: '', ...point }));
-
-// The supplied SVG is preserved unchanged; the base extracts its plan without the static legend/numbers.
-const mapConfig = {
-  image: './assets/plotinka-map-base.svg',
-  referencePath: './assets/plotinka-map-reference.svg',
-  referenceReady: true,
-  width: 1120,
-  height: 1043
-};
-const mediaConfig = { mascot: '', mascotPath: './assets/mascot.png' };
-const chapterCount = new Set(points.map(point => point.chapterNumber)).size;
-const gateCount = points.filter(point => point.type === 'gate').length;
-const modernIdeas = ['Сцена', 'Арт-пространства', 'Зоны отдыха', 'Творческие активности', 'Современное искусство', 'Новые общественные пространства'];
-
+// Generated states keep the original data → state → renderer architecture.
 const states = {
-  intro: { kind: 'intro', next: `point${points[0].id}` },
-  modern: { kind: 'modern', next: 'finish' },
-  finish: { kind: 'finish', next: 'intro' }
+  welcome: { kind: 'welcome', next: `route${points[0].id}` },
+  finish: { kind: 'finish', next: 'presentation' },
+  presentation: { kind: 'presentation', next: 'finish' }
 };
 points.forEach((point, index) => {
-  const following = index < points.length - 1 ? `route${points[index + 1].id}` : 'modern';
-  states[`point${point.id}`] = { kind: 'point', index, next: point.type === 'final' ? `finale${point.id}` : following };
-  if (index > 0) states[`route${point.id}`] = { kind: 'route', index, next: `point${point.id}` };
-  if (point.type === 'final') states[`finale${point.id}`] = { kind: 'finale', index, next: following };
+  states[`route${point.id}`] = { kind: 'map', index, next: `point${point.id}` };
+  states[`point${point.id}`] = { kind: 'point', index, next: index + 1 < points.length ? `route${points[index + 1].id}` : 'finish' };
 });
-
 const app = document.getElementById('app');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-let state = 'intro';
-let transitioning = false;
 const visited = new Set();
-const foundGates = new Set();
-const discoveries = new Set();
+let state = 'welcome';
+let transitioning = false;
+let renderVersion = 0;
 
 function escapeHTML(value) {
   return String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
 }
 function number(value) { return String(value).padStart(2, '0'); }
-function svgPosition(x, y) { return [x * mapConfig.width / 100, y * mapConfig.height / 100]; }
-function routePath(index) {
-  const point = points[index];
-  const previous = points[index - 1];
-  return [[previous.x, previous.y], ...point.route, [point.x, point.y]].map(([x, y], i) => `${i ? 'L' : 'M'}${svgPosition(x,y).join(' ')}`).join(' ');
+function paragraphs(text) { return String(text).split('\n').filter(Boolean).map(p => `<p>${escapeHTML(p)}</p>`).join(''); }
+function buttonMarkup(label, action = 'next', secondary = false) {
+  return `<button class="${secondary ? 'secondary-button' : 'primary-button'}" type="button" data-action="${action}"><span>${escapeHTML(label)}</span><span class="arrow" aria-hidden="true">${action === 'back' ? '←' : '↗'}</span></button>`;
 }
-
-function mapMarkup(completed, active, drawRoute = false) {
-  const finished = completed === points.length;
-  const location = completed > 0 ? points[completed - 1] : points[0];
-  const unit = Math.min(mapConfig.width, mapConfig.height) / 620;
-  const mapSummary = points.map((p, i) => `${p.id}. ${p.shortTitle}: ${i < completed ? 'пройдено' : i === active ? 'текущая цель' : 'впереди'}`).join('. ');
-  const routes = points.slice(1).map((point, offset) => {
-    const index = offset + 1;
-    if (!finished && index > active) return '';
-    return `<path class="route-segment${drawRoute && index === active ? ' route-segment--new' : !finished ? ' route-segment--past' : ''}" data-route="${points[index-1].id}-${point.id}" pathLength="1" d="${routePath(index)}" style="stroke-width:${5*unit}"/>`;
-  }).join('');
-  const nodes = points.map((point, index) => {
-    const done = index < completed;
-    const current = !done && index === active;
-    const [anchorX,anchorY] = svgPosition(point.x, point.y);
-    const [dx,dy] = point.markerOffset || [0,0];
-    const [x,y] = svgPosition(point.x + dx, point.y + dy);
-    const radius = (current ? 22 : 19) * unit;
-    return `<g class="map-node ${done ? 'map-node--done' : current ? 'map-node--active' : 'map-node--upcoming'}" data-point="${point.id}" data-status="${done ? 'visited' : current ? 'current' : 'upcoming'}">
-      <title>${point.id}. ${escapeHTML(point.title)}</title>
-      ${dx || dy ? `<path class="marker-leader" d="M${anchorX} ${anchorY} L${x} ${y}"/><circle class="marker-anchor" cx="${anchorX}" cy="${anchorY}" r="${3*unit}"/>` : ''}
-      ${current ? `<circle class="node-halo" cx="${x}" cy="${y}" r="${30*unit}"/>` : ''}
-      <circle class="node-disc" cx="${x}" cy="${y}" r="${radius}"/>
-      ${done ? `<path d="M${x-7*unit} ${y} l${5*unit} ${6*unit} ${11*unit} ${-12*unit}" fill="none" stroke="#26392d" stroke-width="${3*unit}" stroke-linecap="round" stroke-linejoin="round"/>` : `<text class="node-number" x="${x}" y="${y}" style="font-size:${19*unit}px">${point.id}</text>`}
-    </g>`;
-  }).join('');
-  const [labelX,labelY] = svgPosition(location.labelX, location.labelY);
-  const crop = mapConfig.crop;
-  const imageStyle = crop ? `width:${mapConfig.sourceWidth/crop.width*100}%;height:${mapConfig.sourceHeight/crop.height*100}%;left:${-crop.x/crop.width*100}%;top:${-crop.y/crop.height*100}%;` : '';
-  return `<div class="map-panel">
-    <div class="map-toolbar"><span>${mapConfig.referenceReady ? 'ИСТОРИЧЕСКАЯ СХЕМА' : 'ВРЕМЕННАЯ СХЕМА'}</span><button type="button" class="map-zoom" data-action="zoom" aria-pressed="false">Крупнее <span aria-hidden="true">＋</span></button></div>
-    <div class="map-frame map-viewport" style="--map-ratio:${mapConfig.width}/${mapConfig.height}" tabindex="0" aria-label="Карта маршрута; используйте кнопку Крупнее для увеличения">
-      <div class="map-canvas" style="aspect-ratio:${mapConfig.width}/${mapConfig.height}">
-        <img class="map-base" style="${imageStyle}" src="${mapConfig.image}" width="${mapConfig.sourceWidth || mapConfig.width}" height="${mapConfig.sourceHeight || mapConfig.height}" alt="${mapConfig.referenceReady ? 'Историческая схема ансамбля Екатеринбургского завода' : 'Временная условная схема территории'}">
-        <svg class="map-svg map-overlay" viewBox="0 0 ${mapConfig.width} ${mapConfig.height}" role="img" aria-labelledby="map-title map-desc">
-          <title id="map-title">${points.length} объектов маршрута</title><desc id="map-desc">${escapeHTML(mapSummary)}. Схема не предназначена для точной навигации.</desc>
-          ${routes}${nodes}
-          ${!finished ? `<g transform="translate(${labelX},${labelY})" aria-hidden="true"><rect class="you-label" x="${-53*unit}" y="${-11*unit}" width="${106*unit}" height="${24*unit}" rx="${12*unit}"/><text class="you-text" y="${5*unit}" style="font-size:${14*unit}px">Вы здесь</text></g>` : ''}
-        </svg>
-      </div>
-    </div>
-    <div class="map-legend"><span><i class="legend-visited"></i>Пройдено</span><span><i class="legend-current"></i>Цель</span><span><i class="legend-upcoming"></i>Впереди</span></div>
-    <p class="map-disclaimer">${mapConfig.referenceReady ? 'По исторической схеме. Положение точек и путь приблизительные.' : 'Временное расположение объектов. Для привязки нужна историческая схема.'}</p>
-  </div>`;
-}
-
 function progressMarkup(index) {
-  return `<div class="route-progress"><div class="progress-label"><span>${number(index+1)} / ${number(points.length)}</span><span>Глава ${points[index].chapterNumber} / ${chapterCount}</span></div><div class="progress-track" role="progressbar" aria-label="Прогресс прогулки" aria-valuemin="0" aria-valuemax="${points.length}" aria-valuenow="${index+1}"><span style="width:${(index+1)/points.length*100}%"></span></div></div>`;
+  return `<div class="route-progress"><div class="progress-label"><span><b>${number(index + 1)}</b> / ${number(points.length)}</span><span>${escapeHTML(points[index].section)}</span></div><div class="progress-track" role="progressbar" aria-label="Прогресс прогулки" aria-valuemin="0" aria-valuemax="${points.length}" aria-valuenow="${index + 1}"><span style="width:${(index + 1) / points.length * 100}%"></span></div></div>`;
 }
-function gateMarkup() {
-  if (!foundGates.size) return '';
-  return `<aside class="gate-collection" aria-label="Ворота: ${foundGates.size} из ${gateCount} найдено"><div><strong>ВОРОТА</strong><span class="gate-dots" aria-hidden="true">${points.filter(p=>p.type==='gate').map(p=>`<i class="${foundGates.has(p.id)?'found':''}"></i>`).join('')}</span></div><span class="gate-total">${foundGates.size} / ${gateCount} найдено</span></aside>`;
-}
-function hintMarkup(point) {
-  return point.hint ? `<aside class="story-hint"><p class="eyebrow">${escapeHTML(point.hintTitle || 'ОБРАТИ ВНИМАНИЕ')}</p><p>${escapeHTML(point.hint)}</p></aside>` : '';
-}
-function mascotMarkup(point) {
-  if (!point.mascotText) return '';
-  return `<aside class="mascot-note">${mediaConfig.mascot ? `<img hidden data-optional-image src="${escapeHTML(mediaConfig.mascot)}" alt="Маскот-рассказчик" width="56" height="56">` : ''}<p>${escapeHTML(point.mascotText)}</p></aside>`;
+function mascotMarkup(config, context = '') {
+  const position = config.position === 'left' ? 'left' : 'right';
+  const size = ['small', 'medium', 'large'].includes(config.size) ? config.size : 'medium';
+  return `<aside class="mascot mascot--${size} mascot--${position}${config.cutout ? ' mascot--cutout' : ' mascot--panel'} ${context}" aria-label="${escapeHTML(site.mascotName)}">
+    <div class="mascot-portrait media-slot">
+      <span class="mascot-fallback" aria-hidden="true">${escapeHTML(site.mascotFallback)}</span>
+      <img hidden data-optional-image data-src="./assets/mascot/${escapeHTML(config.image)}" alt="${escapeHTML(site.mascotName)}" class="mascot-image">
+    </div>
+    ${config.speech ? `<div class="mascot-speech"><span>${escapeHTML(site.mascotName)}</span><p>${escapeHTML(config.speech)}</p></div>` : ''}
+  </aside>`;
 }
 function artMarkup(point) {
-  return `<div class="story-art story-art--${point.art}" role="img" aria-label="${point.image ? escapeHTML(point.title) : 'Визуальный эскиз: '+escapeHTML(point.shortTitle)}">
-    <div class="art-topline" aria-hidden="true"><span>${escapeHTML(point.theme)}</span><span>ПЛОТИНКА</span></div>
-    <span class="art-number" aria-hidden="true">${number(point.id)}</span><span class="art-caption" aria-hidden="true">ВИЗУАЛЬНЫЙ ЭСКИЗ</span>
-    ${point.image ? `<img hidden class="story-image" data-optional-image src="${escapeHTML(point.image)}" alt="${escapeHTML(point.title)}">` : ''}
-  </div>`;
+  return `<figure class="story-art story-art--${point.art} media-slot">
+    <div class="photo-fallback" role="img" aria-label="${escapeHTML(site.photoFallback)}: ${escapeHTML(point.title)}"><div class="art-topline"><span>${escapeHTML(point.section)}</span><span>ЕКБ</span></div><span class="art-number" aria-hidden="true">${number(point.id)}</span><span class="art-shape" aria-hidden="true"></span><span class="art-caption">${escapeHTML(site.photoFallback)}</span></div>
+    <img hidden class="story-image" data-optional-image data-src="${escapeHTML(point.image)}" alt="${escapeHTML(point.title)}">
+  </figure>`;
 }
 function bindOptionalImages() {
   app.querySelectorAll('[data-optional-image]').forEach(image => {
-    const show = () => { image.hidden = false; image.closest('.story-art')?.classList.add('has-photo'); };
-    const fallback = () => { image.remove(); };
-    image.addEventListener('load',show,{once:true});
-    image.addEventListener('error',fallback,{once:true});
+    const fallback = () => { image.hidden = true; image.closest('.media-slot')?.classList.remove('has-media'); };
+    const show = () => {
+      // The supplied 1×1 technical placeholders keep default URLs valid. Replace files, no JS edits needed.
+      if (image.naturalWidth <= 1 || image.naturalHeight <= 1) return fallback();
+      image.hidden = false;
+      image.closest('.media-slot')?.classList.add('has-media');
+    };
+    image.addEventListener('load', show, { once: true });
+    image.addEventListener('error', fallback, { once: true });
+    image.src = image.dataset.src;
     if (image.complete) { if (image.naturalWidth) show(); else fallback(); }
   });
 }
-function buttonMarkup(label, note = '', action = 'next') {
-  return `<div class="actions"><button class="primary-button" type="button" data-action="${action}"><span>${escapeHTML(label)}</span><span class="arrow" aria-hidden="true">↗</span></button>${note ? `<p class="action-note">${escapeHTML(note)}</p>` : ''}</div>`;
+
+// Coordinates remain percentages of the source PNG. Only the display is rotated 90°.
+function svgPosition(x, y) {
+  const f = mapConfig.frame;
+  return [f.y + f.height - y * mapConfig.height / 100, x * mapConfig.width / 100 - f.x];
 }
-function screenMarkup(className, copy, visual, actions) {
-  return `<section class="screen ${className}" aria-labelledby="screen-title"><div class="screen-copy">${copy}</div><div class="visual">${visual}</div>${actions}</section>`;
+function routePath(segment) {
+  const from = points.find(point => point.id === segment.from).map;
+  const to = points.find(point => point.id === segment.to).map;
+  return [[from.x, from.y], ...segment.points, [to.x, to.y]].map(([x, y], i) => `${i ? 'L' : 'M'}${svgPosition(x, y).join(' ')}`).join(' ');
 }
-function chapterMarkup(point) {
-  return `<p class="eyebrow chapter-eyebrow"><span>ГЛАВА ${point.chapterNumber} / ${chapterCount}</span>${escapeHTML(point.chapter)}</p>`;
+function mapMarkup(completed, active, drawRoute = false, miniature = false) {
+  const f = mapConfig.frame;
+  const finished = completed === points.length;
+  const routes = routeSegments.map(segment => {
+    const index = points.findIndex(p => p.id === segment.to);
+    if (!finished && index > active) return '';
+    return `<path class="route-segment${drawRoute && index === active ? ' route-segment--new' : ''}" data-route="${segment.from}-${segment.to}" pathLength="1" d="${routePath(segment)}"/>`;
+  }).join('');
+  const nodes = points.map((point, index) => {
+    const status = index < completed ? 'visited' : index === active ? 'current' : 'upcoming';
+    const [x, y] = svgPosition(point.map.x, point.map.y);
+    return `<g class="map-node map-node--${status}" data-point="${point.id}" data-status="${status}"><title>${point.id}. ${escapeHTML(point.title)} — ${status === 'visited' ? 'пройдено' : status === 'current' ? 'текущая остановка' : 'впереди'}</title>${status === 'current' ? `<circle class="node-halo" cx="${x}" cy="${y}" r="42"/>` : ''}<circle class="node-disc" cx="${x}" cy="${y}" r="27"/><text class="node-number" x="${x}" y="${y}">${point.id}</text>${status === 'visited' ? `<path class="node-tick" d="M${x + 16} ${y - 24} l5 5 10 -11"/>` : ''}</g>`;
+  }).join('');
+  return `<div class="map-panel${miniature ? ' map-panel--mini' : ''}">
+    ${!miniature ? `<div class="map-toolbar"><span>${escapeHTML(site.mapLabel)}</span><button type="button" class="map-zoom" data-action="zoom" aria-pressed="false">Крупнее <span aria-hidden="true">＋</span></button></div>` : ''}
+    <div class="map-viewport" style="--map-ratio:${f.height}/${f.width}" tabindex="0" aria-label="Карта маршрута">
+      <div class="map-canvas" style="aspect-ratio:${f.height}/${f.width}">
+        <img class="map-base" src="${escapeHTML(mapConfig.image)}" alt="Карта Исторического сквера" style="width:${mapConfig.width / f.height * 100}%;left:${(f.height + f.y) / f.height * 100}%;top:${-f.x / f.width * 100}%;" width="${mapConfig.width}" height="${mapConfig.height}">
+        <svg class="map-overlay${drawRoute ? ' is-drawing' : ''}" viewBox="0 0 ${f.height} ${f.width}" role="img" aria-label="${points.length} остановок; пройдено ${completed}">${routes}${nodes}</svg>
+      </div>
+    </div>
+    ${!miniature ? `<div class="map-legend"><span><i class="legend-visited"></i>Пройдено</span><span><i class="legend-current"></i>Сейчас</span><span><i class="legend-upcoming"></i>Впереди</span></div>` : ''}
+  </div>`;
+}
+function screenTitle(text, className = '') {
+  return `<h1 id="screen-title" class="${className}" tabindex="-1">${escapeHTML(text).replace(/\n/g, '<br>')}</h1>`;
 }
 function renderPoint(current) {
   const point = points[current.index];
-  const finding = point.type === 'find' && !discoveries.has(point.id);
-  const title = finding ? point.prompt : point.storyTitle || point.title;
-  const story = finding ? '<p class="description">Посмотри вокруг. Когда заметишь остатки стены, открой историю этого места.</p>' : `<p class="description"${point.type==='find'?' role="status"':''}>${escapeHTML(point.description)}</p>`;
-  const sequence = point.storySequence ? `<ol class="meaning-sequence">${point.storySequence.map(item=>`<li>${escapeHTML(item)}</li>`).join('')}</ol>` : '';
-  const copy = `${chapterMarkup(point)}<p class="point-id">ОБЪЕКТ ${number(point.id)}</p><h1 id="screen-title" tabindex="-1">${escapeHTML(title)}</h1>${story}${!finding?sequence:''}${hintMarkup(point)}${!finding?mascotMarkup(point):''}${progressMarkup(current.index)}${gateMarkup()}`;
-  const label = finding ? 'Нашёл' : point.actionLabel || (point.type === 'final' ? 'От истории — к сегодняшнему дню' : point.compact ? 'Продолжить' : 'Продолжить маршрут');
-  return screenMarkup(`point-screen point-type-${point.type}${point.compact?' compact-point':''}${point.art==='grotto'?' hidden-history':''}`,copy,artMarkup(point),buttonMarkup(label,'',finding?'discover':'next'));
+  return `<section class="screen point-screen" aria-labelledby="screen-title">
+    <div class="point-heading">${progressMarkup(current.index)}<p class="eyebrow">${escapeHTML(site.storyLabel)}</p>${screenTitle(point.title)}</div>
+    <div class="point-visual">${artMarkup(point)}${mascotMarkup(point.mascot, 'point-mascot')}</div>
+    <div class="point-story"><div class="poem-block"><p class="eyebrow">${escapeHTML(site.poemLabel)}</p><blockquote>${point.poem.map(line => `<p>${escapeHTML(line)}</p>`).join('')}</blockquote></div><div class="story-description"><p class="eyebrow">${escapeHTML(site.demoLabel)}</p>${paragraphs(point.description)}</div><div class="actions">${buttonMarkup(current.index === points.length - 1 ? 'Завершить прогулку' : 'Продолжить маршрут')}</div></div>
+  </section>`;
 }
-
 const renderers = {
-  intro: () => screenMarkup('intro-screen', `<p class="eyebrow">ИСТОРИЧЕСКИЙ СКВЕР / ЕКБ</p><h1 id="screen-title" class="intro-title" tabindex="-1">Плотинка</h1><p class="subtitle">История города<br>прямо под твоими ногами</p><div class="meta"><span class="pill pill--accent"><span class="pill-dot" aria-hidden="true"></span>${points.length} объектов</span><span class="pill">≈ 30–40 минут</span></div>`,mapMarkup(0,0),buttonMarkup('Начать прогулку','Шесть глав. Одна история города.')),
-  point: renderPoint,
-  route: current => {
+  welcome: () => `<section class="screen welcome-screen" aria-labelledby="screen-title"><div class="welcome-copy"><p class="eyebrow">${escapeHTML(site.welcomeEyebrow)}</p>${screenTitle(site.title, 'intro-title')}<p class="subtitle">${escapeHTML(site.subtitle)}</p></div><div class="welcome-visual"><span class="orbit-word" aria-hidden="true">ПРИВЕТ, ГОРОД!</span>${mascotMarkup({ ...site.welcomeMascot, speech: site.welcomeSpeech }, 'welcome-mascot')}</div><div class="welcome-bottom"><div class="meta"><span>${points.length} точек</span><span>≈ ${escapeHTML(site.duration)}</span><span>Пешком</span></div><div class="actions">${buttonMarkup('Начать прогулку')}</div></div></section>`,
+  map: current => {
     const point = points[current.index];
-    return screenMarkup('route-screen',`${chapterMarkup(point)}<p class="point-id">СЛЕДУЮЩАЯ ОСТАНОВКА / ${number(point.id)}</p><h1 id="screen-title" tabindex="-1">${escapeHTML(point.shortTitle)}</h1><div class="meta"><span class="pill pill--accent">${number(points[current.index-1].id)} → ${number(point.id)}</span><span class="pill">≈ ${point.minutes} мин пешком</span></div><p class="description">Следуйте по отмеченному маршруту.</p>${gateMarkup()}`,mapMarkup(visited.size,current.index,true),buttonMarkup('Я на месте','Схема прогулки. Ориентируйтесь на доступные дорожки.'));
+    const draw = current.index > 0;
+    return `<section class="screen map-screen${draw ? ' map-screen--drawing' : ''}" aria-labelledby="screen-title"><div class="map-heading">${progressMarkup(current.index)}${screenTitle('Твоя прогулка', 'map-title')}</div>${mapMarkup(visited.size, current.index, draw)}<div class="next-stop"><p class="eyebrow">СЛЕДУЮЩАЯ ОСТАНОВКА</p><div class="stop-title"><span>${number(point.id)}</span><h2>${escapeHTML(point.title)}</h2></div><p class="walking-time">${current.index === 0 ? 'Здесь начинается маршрут' : `≈ ${points[current.index - 1].minutesToNext} мин пешком`}</p>${mascotMarkup(site.mapMascot)}${buttonMarkup('Я на месте')}<p class="map-hint">${escapeHTML(site.mapHint)}</p></div></section>`;
   },
-  finale: current => {
-    const finale = points[current.index].finale;
-    return screenMarkup('finale-screen',`<p class="eyebrow">ИСТОРИЯ ПРОДОЛЖАЕТСЯ</p><h1 id="screen-title" tabindex="-1">От плотины<br>до города</h1><p class="description">${escapeHTML(finale.text)}</p>`,`<ol class="history-sequence" aria-label="История города">${finale.sequence.map((word,index)=>`<li style="--step:${index}">${escapeHTML(word)}</li>`).join('')}</ol>`,buttonMarkup('Посмотреть Плотинку сегодня'));
-  },
-  modern: () => screenMarkup('modern-screen',`<p class="eyebrow">СЛЕДУЮЩАЯ ГЛАВА / СЕГОДНЯ</p><h1 id="screen-title" tabindex="-1">Современная Плотинка</h1><p class="description">Историческое место может стать пространством новых встреч и идей. Это демонстрация будущего раздела: ниже — направления, которые предстоит наполнить проектами.</p>`,`<div class="modern-ideas"><p class="eyebrow">ИДЕИ ДЛЯ ПРОДОЛЖЕНИЯ</p><ul>${modernIdeas.map((idea,i)=>`<li><span>${number(i+1)}</span>${idea}</li>`).join('')}</ul></div>`,buttonMarkup('Завершить прогулку')),
-  finish: () => screenMarkup('finish-screen',`<p class="eyebrow">МАРШРУТ ПРОЙДЕН</p><h1 id="screen-title" class="finish-title" tabindex="-1">Прогулка<br>завершена</h1><div class="finish-count"><strong>${visited.size} / ${points.length}</strong><span>объектов</span></div><p class="description">Все точки маршрута пройдены. История Плотинки продолжается вместе с нами.</p>${gateMarkup()}`,mapMarkup(visited.size,points.length-1),buttonMarkup('Пройти ещё раз'))
+  point: renderPoint,
+  finish: () => `<section class="screen finish-screen" aria-labelledby="screen-title"><div class="finish-copy"><p class="eyebrow">МАРШРУТ ПРОЙДЕН</p><p class="finish-count">${visited.size} <span>/ ${points.length}</span></p>${screenTitle(site.finishTitle)}<p class="description">${escapeHTML(site.finishText)}</p></div><div class="finish-visual">${mascotMarkup(site.finishMascot)}${mapMarkup(visited.size, points.length - 1, false, true)}</div><div class="actions finish-actions">${buttonMarkup('Посмотреть нашу концепцию')}${buttonMarkup('Пройти ещё раз', 'restart', true)}</div></section>`,
+  presentation: () => `<section class="screen presentation-screen" aria-labelledby="screen-title"><header class="presentation-heading">${buttonMarkup('Назад', 'back', true)}${screenTitle(site.presentationTitle)}</header><div class="presentation-content" aria-live="polite"><div class="presentation-placeholder"><span class="presentation-symbol" aria-hidden="true">п.</span><p class="eyebrow">ИДЕИ ДЛЯ ГОРОДА</p><h2>${escapeHTML(site.presentationPlaceholder)}</h2><p>${escapeHTML(site.presentationText)}</p></div></div></section>`
 };
-
+async function bindPresentation(version) {
+  const container = app.querySelector('.presentation-content');
+  try {
+    const response = await fetch(site.presentationPath);
+    if (!response.ok) return;
+    const blob = await response.blob();
+    // The empty tracked file is a replace-in-place placeholder, not a PDF document.
+    if (!blob.size || !(await blob.slice(0, 5).text()).startsWith('%PDF-')) return;
+    if (version !== renderVersion || state !== 'presentation' || !container.isConnected) return;
+    const path = escapeHTML(site.presentationPath);
+    container.innerHTML = `<a class="secondary-button pdf-fallback" href="${path}" target="_blank" rel="noopener">Открыть презентацию <span aria-hidden="true">↗</span></a><object class="pdf-viewer" data="${path}" type="application/pdf" aria-label="Презентация проекта"><p>Откройте презентацию по ссылке выше.</p></object>`;
+  } catch { /* Offline or missing PDF leaves the same friendly placeholder. */ }
+}
 function render(moveFocus = false) {
   const current = states[state];
   app.innerHTML = renderers[current.kind](current);
   app.dataset.state = state;
-  app.setAttribute('aria-busy','false');
-  document.getElementById('footer-count').textContent = `ДЕМО / ${number(points.length)} ОБЪЕКТОВ`;
+  app.dataset.view = current.kind;
+  app.setAttribute('aria-busy', 'false');
+  document.getElementById('footer-count').textContent = `ДЕМО / ${number(points.length)} ТОЧЕК`;
   bindOptionalImages();
+  const version = ++renderVersion;
+  if (current.kind === 'presentation') bindPresentation(version);
   if (moveFocus) {
-    document.getElementById('screen-title').focus({preventScroll:true});
-    window.scrollTo({top:0,behavior:'instant'});
+    document.getElementById('screen-title').focus({ preventScroll: true });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }
-}
-function resetWalk() { visited.clear(); foundGates.clear(); discoveries.clear(); }
-function enterState(next) {
-  state = next;
-  const current = states[state];
-  if (state === 'intro') resetWalk();
-  if (current.kind === 'point' && points[current.index].type === 'gate') foundGates.add(points[current.index].id);
 }
 function transitionTo(next) {
+  if (!states[next] || transitioning) return;
   transitioning = true;
-  app.setAttribute('aria-busy','true');
-  app.querySelectorAll('button').forEach(button=>{button.disabled=true;});
+  app.setAttribute('aria-busy', 'true');
+  app.querySelectorAll('button').forEach(button => { button.disabled = true; });
   app.querySelector('.screen').classList.add('is-leaving');
-  window.setTimeout(()=>{
-    enterState(next);
+  window.setTimeout(() => {
+    state = next;
+    if (state === 'welcome') visited.clear();
     render(true);
-    transitioning=false;
-  },reduceMotion.matches?0:180);
+    transitioning = false;
+  }, reduceMotion.matches ? 0 : 180);
 }
-app.addEventListener('click',event=>{
-  const button=event.target.closest('[data-action]');
+app.addEventListener('click', event => {
+  const button = event.target.closest('[data-action]');
   if (!button || transitioning) return;
-  const current=states[state];
-  if (button.dataset.action==='zoom') {
-    const viewport=app.querySelector('.map-viewport');
-    const enlarged=viewport.classList.toggle('is-zoomed');
-    button.setAttribute('aria-pressed',String(enlarged));
-    button.innerHTML=enlarged?'Вся схема <span aria-hidden="true">−</span>':'Крупнее <span aria-hidden="true">＋</span>';
-    if(enlarged) {
-      const active=app.querySelector('.map-node--active') || app.querySelector('.map-node');
-      const point=points.find(p=>String(p.id)===active?.dataset.point);
-      if(point){viewport.scrollLeft=viewport.scrollWidth*point.x/100-viewport.clientWidth/2;viewport.scrollTop=viewport.scrollHeight*point.y/100-viewport.clientHeight/2;}
-    } else { viewport.scrollLeft=0;viewport.scrollTop=0; }
+  const action = button.dataset.action;
+  if (action === 'zoom') {
+    const viewport = app.querySelector('.map-viewport');
+    const enlarged = viewport.classList.toggle('is-zoomed');
+    button.setAttribute('aria-pressed', String(enlarged));
+    button.innerHTML = enlarged ? 'Вся схема <span aria-hidden="true">−</span>' : 'Крупнее <span aria-hidden="true">＋</span>';
+    if (enlarged) {
+      const point = points[states[state].index];
+      const [x, y] = svgPosition(point.map.x, point.map.y);
+      viewport.scrollLeft = viewport.scrollWidth * x / mapConfig.frame.height - viewport.clientWidth / 2;
+      viewport.scrollTop = viewport.scrollHeight * y / mapConfig.frame.width - viewport.clientHeight / 2;
+    } else { viewport.scrollLeft = 0; viewport.scrollTop = 0; }
     return;
   }
-  if (button.dataset.action==='discover' && current.kind==='point') {
-    discoveries.add(points[current.index].id);
-    render(true);
-    return;
-  }
-  if(current.kind==='point') {
-    const point=points[current.index];
-    if(point.type==='find'&&!discoveries.has(point.id))return;
-    visited.add(point.id);
-  }
+  if (action === 'restart') { transitionTo('welcome'); return; }
+  if (action === 'back' && state === 'presentation') { transitionTo('finish'); return; }
+  if (action !== 'next') return;
+  const current = states[state];
+  if (current.kind === 'point') visited.add(points[current.index].id);
   transitionTo(current.next);
 });
+document.title = `${site.title} — цифровая прогулка`;
+document.querySelector('.brand-name').textContent = `${site.title.toUpperCase()} / ГИД`;
+document.querySelector('.city').textContent = site.city.toUpperCase();
 render();

@@ -1,0 +1,20 @@
+/* БЫСТРАЯ НАСТРОЙКА: измените значения здесь — палитра обновится на всех экранах. */
+:root {
+  --color-bg: #f4f2e9;
+  --color-surface: #ffffff;
+  --color-text: #24382e;
+  --color-primary: #24382e;
+  --color-secondary: #df7653;
+  --color-accent: #d8ef79;
+  --color-muted: #697168;
+  --color-line: #d6d8cc;
+  --color-soft: #e5e8d9;
+  --color-lilac: #d7d0e5;
+  --color-on-primary: #f4f2e9;
+  --color-map-route: #bd532f;
+  --color-map-current: #24382e;
+  --color-map-visited: #d8ef79;
+  --color-map-upcoming: #ffffff;
+  --font-display: Arial, Helvetica, sans-serif;
+  --font-body: Arial, Helvetica, sans-serif;
+}
